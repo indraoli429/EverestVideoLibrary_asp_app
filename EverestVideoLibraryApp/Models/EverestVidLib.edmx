@@ -1,0 +1,879 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CastMember">
+          <Key>
+            <PropertyRef Name="CastMemberId" />
+          </Key>
+          <Property Name="CastMemberId" Type="int" Nullable="false" />
+          <Property Name="DVDId" Type="int" Nullable="false" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DVDCategory">
+          <Key>
+            <PropertyRef Name="DvdCatId" />
+          </Key>
+          <Property Name="DvdCatId" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="License" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DVDCopy">
+          <Key>
+            <PropertyRef Name="DCopyId" />
+          </Key>
+          <Property Name="DCopyId" Type="int" Nullable="false" />
+          <Property Name="DVDId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReleasedDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DVDDetails">
+          <Key>
+            <PropertyRef Name="DVDId" />
+          </Key>
+          <Property Name="DVDId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DVDCatId" Type="int" Nullable="false" />
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="LoanId" />
+          </Key>
+          <Property Name="LoanId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="DCopyId" Type="int" Nullable="false" />
+          <Property Name="IssuedDate" Type="datetime" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnedDate" Type="datetime" />
+          <Property Name="DueAmount" Type="nvarchar" MaxLength="50" />
+          <Property Name="FineAmount" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="MemberCatId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MemberCategory">
+          <Key>
+            <PropertyRef Name="MemberCatId" />
+          </Key>
+          <Property Name="MemberCatId" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TotalDays" Type="int" Nullable="false" />
+          <Property Name="TotalLoan" Type="int" Nullable="false" />
+          <Property Name="FineAmountPerDay" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="ProducerId" />
+          </Key>
+          <Property Name="ProducerId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProducerDVDDetailsMapping">
+          <Key>
+            <PropertyRef Name="proDVDmapping" />
+          </Key>
+          <Property Name="proDVDmapping" Type="int" Nullable="false" />
+          <Property Name="DVDId" Type="int" Nullable="false" />
+          <Property Name="ProducerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="StudioId" />
+          </Key>
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTypes">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_DVDCopy_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetails" Multiplicity="1" />
+          <End Role="DVDCopy" Type="Self.DVDCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="DVDCopy">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DVDDetails_DVDCategory">
+          <End Role="DVDCategory" Type="Self.DVDCategory" Multiplicity="1" />
+          <End Role="DVDDetails" Type="Self.DVDDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDCategory">
+              <PropertyRef Name="DvdCatId" />
+            </Principal>
+            <Dependent Role="DVDDetails">
+              <PropertyRef Name="DVDCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DVDDetails_Studio">
+          <End Role="Studio" Type="Self.Studio" Multiplicity="1" />
+          <End Role="DVDDetails" Type="Self.DVDDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studio">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="DVDDetails">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loan_DVDCopy">
+          <End Role="DVDCopy" Type="Self.DVDCopy" Multiplicity="1" />
+          <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDCopy">
+              <PropertyRef Name="DCopyId" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="DCopyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loan_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MemberCategory">
+          <End Role="MemberCategory" Type="Self.MemberCategory" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberCategory">
+              <PropertyRef Name="MemberCatId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MemberCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProducerDVDDetailsMapping_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetails" Multiplicity="1" />
+          <End Role="ProducerDVDDetailsMapping" Type="Self.ProducerDVDDetailsMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="ProducerDVDDetailsMapping">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProducerDVDDetailsMapping_Producer">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+          <End Role="ProducerDVDDetailsMapping" Type="Self.ProducerDVDDetailsMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="ProducerId" />
+            </Principal>
+            <Dependent Role="ProducerDVDDetailsMapping">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_Artist">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="1" />
+          <End Role="CastMember" Type="Self.CastMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistId" />
+            </Principal>
+            <Dependent Role="CastMember">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetails" Multiplicity="1" />
+          <End Role="CastMember" Type="Self.CastMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="CastMember">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserType">
+          <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CastMember" EntityType="Self.CastMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DVDCategory" EntityType="Self.DVDCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DVDCopy" EntityType="Self.DVDCopy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DVDDetails" EntityType="Self.DVDDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberCategory" EntityType="Self.MemberCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProducerDVDDetailsMapping" EntityType="Self.ProducerDVDDetailsMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studio" EntityType="Self.Studio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DVDCopy_DVDDetails" Association="Self.FK_DVDCopy_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="DVDCopy" EntitySet="DVDCopy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DVDDetails_DVDCategory" Association="Self.FK_DVDDetails_DVDCategory">
+            <End Role="DVDCategory" EntitySet="DVDCategory" />
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DVDDetails_Studio" Association="Self.FK_DVDDetails_Studio">
+            <End Role="Studio" EntitySet="Studio" />
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loan_DVDCopy" Association="Self.FK_Loan_DVDCopy">
+            <End Role="DVDCopy" EntitySet="DVDCopy" />
+            <End Role="Loan" EntitySet="Loan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loan_Member" Association="Self.FK_Loan_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Loan" EntitySet="Loan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MemberCategory" Association="Self.FK_Member_MemberCategory">
+            <End Role="MemberCategory" EntitySet="MemberCategory" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProducerDVDDetailsMapping_DVDDetails" Association="Self.FK_ProducerDVDDetailsMapping_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="ProducerDVDDetailsMapping" EntitySet="ProducerDVDDetailsMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProducerDVDDetailsMapping_Producer" Association="Self.FK_ProducerDVDDetailsMapping_Producer">
+            <End Role="Producer" EntitySet="Producer" />
+            <End Role="ProducerDVDDetailsMapping" EntitySet="ProducerDVDDetailsMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_Artist" Association="Self.FK_Table_Artist">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="CastMember" EntitySet="CastMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_DVDDetails" Association="Self.FK_Table_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="CastMember" EntitySet="CastMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserType" Association="Self.FK_Users_UserType">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CastMembers" Relationship="Self.FK_Table_Artist" FromRole="Artist" ToRole="CastMember" />
+        </EntityType>
+        <EntityType Name="CastMember">
+          <Key>
+            <PropertyRef Name="CastMemberId" />
+          </Key>
+          <Property Name="CastMemberId" Type="Int32" Nullable="false" />
+          <Property Name="DVDId" Type="Int32" Nullable="false" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_Table_Artist" FromRole="CastMember" ToRole="Artist" />
+          <NavigationProperty Name="DVDDetail" Relationship="Self.FK_Table_DVDDetails" FromRole="CastMember" ToRole="DVDDetails" />
+        </EntityType>
+        <EntityType Name="DVDCategory">
+          <Key>
+            <PropertyRef Name="DvdCatId" />
+          </Key>
+          <Property Name="DvdCatId" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="License" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DVDDetails" Relationship="Self.FK_DVDDetails_DVDCategory" FromRole="DVDCategory" ToRole="DVDDetails" />
+        </EntityType>
+        <EntityType Name="DVDCopy">
+          <Key>
+            <PropertyRef Name="DCopyId" />
+          </Key>
+          <Property Name="DCopyId" Type="Int32" Nullable="false" />
+          <Property Name="DVDId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleasedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DVDDetail" Relationship="Self.FK_DVDCopy_DVDDetails" FromRole="DVDCopy" ToRole="DVDDetails" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK_Loan_DVDCopy" FromRole="DVDCopy" ToRole="Loan" />
+        </EntityType>
+        <EntityType Name="DVDDetail">
+          <Key>
+            <PropertyRef Name="DVDId" />
+          </Key>
+          <Property Name="DVDId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DVDCatId" Type="Int32" Nullable="false" />
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CastMembers" Relationship="Self.FK_Table_DVDDetails" FromRole="DVDDetails" ToRole="CastMember" />
+          <NavigationProperty Name="DVDCategory" Relationship="Self.FK_DVDDetails_DVDCategory" FromRole="DVDDetails" ToRole="DVDCategory" />
+          <NavigationProperty Name="DVDCopies" Relationship="Self.FK_DVDCopy_DVDDetails" FromRole="DVDDetails" ToRole="DVDCopy" />
+          <NavigationProperty Name="Studio" Relationship="Self.FK_DVDDetails_Studio" FromRole="DVDDetails" ToRole="Studio" />
+          <NavigationProperty Name="ProducerDVDDetailsMappings" Relationship="Self.FK_ProducerDVDDetailsMapping_DVDDetails" FromRole="DVDDetails" ToRole="ProducerDVDDetailsMapping" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="LoanId" />
+          </Key>
+          <Property Name="LoanId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="DCopyId" Type="Int32" Nullable="false" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnedDate" Type="DateTime" Precision="3" />
+          <Property Name="DueAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FineAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DVDCopy" Relationship="Self.FK_Loan_DVDCopy" FromRole="Loan" ToRole="DVDCopy" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Loan_Member" FromRole="Loan" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="MemberCatId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Loans" Relationship="Self.FK_Loan_Member" FromRole="Member" ToRole="Loan" />
+          <NavigationProperty Name="MemberCategory" Relationship="Self.FK_Member_MemberCategory" FromRole="Member" ToRole="MemberCategory" />
+        </EntityType>
+        <EntityType Name="MemberCategory">
+          <Key>
+            <PropertyRef Name="MemberCatId" />
+          </Key>
+          <Property Name="MemberCatId" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalDays" Type="Int32" Nullable="false" />
+          <Property Name="TotalLoan" Type="Int32" Nullable="false" />
+          <Property Name="FineAmountPerDay" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_Member_MemberCategory" FromRole="MemberCategory" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="ProducerId" />
+          </Key>
+          <Property Name="ProducerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProducerDVDDetailsMappings" Relationship="Self.FK_ProducerDVDDetailsMapping_Producer" FromRole="Producer" ToRole="ProducerDVDDetailsMapping" />
+        </EntityType>
+        <EntityType Name="ProducerDVDDetailsMapping">
+          <Key>
+            <PropertyRef Name="proDVDmapping" />
+          </Key>
+          <Property Name="proDVDmapping" Type="Int32" Nullable="false" />
+          <Property Name="DVDId" Type="Int32" Nullable="false" />
+          <Property Name="ProducerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DVDDetail" Relationship="Self.FK_ProducerDVDDetailsMapping_DVDDetails" FromRole="ProducerDVDDetailsMapping" ToRole="DVDDetails" />
+          <NavigationProperty Name="Producer" Relationship="Self.FK_ProducerDVDDetailsMapping_Producer" FromRole="ProducerDVDDetailsMapping" ToRole="Producer" />
+        </EntityType>
+        <EntityType Name="Studio">
+          <Key>
+            <PropertyRef Name="StudioId" />
+          </Key>
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DVDDetails" Relationship="Self.FK_DVDDetails_Studio" FromRole="Studio" ToRole="DVDDetails" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_Users_UserType" FromRole="Users" ToRole="UserTypes" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserType" FromRole="UserTypes" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Table_Artist">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="1" />
+          <End Role="CastMember" Type="Self.CastMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistId" />
+            </Principal>
+            <Dependent Role="CastMember">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetail" Multiplicity="1" />
+          <End Role="CastMember" Type="Self.CastMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="CastMember">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DVDDetails_DVDCategory">
+          <End Role="DVDCategory" Type="Self.DVDCategory" Multiplicity="1" />
+          <End Role="DVDDetails" Type="Self.DVDDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDCategory">
+              <PropertyRef Name="DvdCatId" />
+            </Principal>
+            <Dependent Role="DVDDetails">
+              <PropertyRef Name="DVDCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DVDCopy_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetail" Multiplicity="1" />
+          <End Role="DVDCopy" Type="Self.DVDCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="DVDCopy">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loan_DVDCopy">
+          <End Role="DVDCopy" Type="Self.DVDCopy" Multiplicity="1" />
+          <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDCopy">
+              <PropertyRef Name="DCopyId" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="DCopyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DVDDetails_Studio">
+          <End Role="Studio" Type="Self.Studio" Multiplicity="1" />
+          <End Role="DVDDetails" Type="Self.DVDDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studio">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="DVDDetails">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProducerDVDDetailsMapping_DVDDetails">
+          <End Role="DVDDetails" Type="Self.DVDDetail" Multiplicity="1" />
+          <End Role="ProducerDVDDetailsMapping" Type="Self.ProducerDVDDetailsMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DVDDetails">
+              <PropertyRef Name="DVDId" />
+            </Principal>
+            <Dependent Role="ProducerDVDDetailsMapping">
+              <PropertyRef Name="DVDId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Loan_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Loan" Type="Self.Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_MemberCategory">
+          <End Role="MemberCategory" Type="Self.MemberCategory" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberCategory">
+              <PropertyRef Name="MemberCatId" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="MemberCatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProducerDVDDetailsMapping_Producer">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+          <End Role="ProducerDVDDetailsMapping" Type="Self.ProducerDVDDetailsMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="ProducerId" />
+            </Principal>
+            <Dependent Role="ProducerDVDDetailsMapping">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_UserType">
+          <End Role="UserTypes" Type="Self.UserType" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="CastMembers" EntityType="Self.CastMember" />
+          <EntitySet Name="DVDCategories" EntityType="Self.DVDCategory" />
+          <EntitySet Name="DVDCopies" EntityType="Self.DVDCopy" />
+          <EntitySet Name="DVDDetails" EntityType="Self.DVDDetail" />
+          <EntitySet Name="Loans" EntityType="Self.Loan" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="MemberCategories" EntityType="Self.MemberCategory" />
+          <EntitySet Name="Producers" EntityType="Self.Producer" />
+          <EntitySet Name="ProducerDVDDetailsMappings" EntityType="Self.ProducerDVDDetailsMapping" />
+          <EntitySet Name="Studios" EntityType="Self.Studio" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_Table_Artist" Association="Self.FK_Table_Artist">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="CastMember" EntitySet="CastMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_DVDDetails" Association="Self.FK_Table_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="CastMember" EntitySet="CastMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DVDDetails_DVDCategory" Association="Self.FK_DVDDetails_DVDCategory">
+            <End Role="DVDCategory" EntitySet="DVDCategories" />
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DVDCopy_DVDDetails" Association="Self.FK_DVDCopy_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="DVDCopy" EntitySet="DVDCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loan_DVDCopy" Association="Self.FK_Loan_DVDCopy">
+            <End Role="DVDCopy" EntitySet="DVDCopies" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DVDDetails_Studio" Association="Self.FK_DVDDetails_Studio">
+            <End Role="Studio" EntitySet="Studios" />
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProducerDVDDetailsMapping_DVDDetails" Association="Self.FK_ProducerDVDDetailsMapping_DVDDetails">
+            <End Role="DVDDetails" EntitySet="DVDDetails" />
+            <End Role="ProducerDVDDetailsMapping" EntitySet="ProducerDVDDetailsMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Loan_Member" Association="Self.FK_Loan_Member">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_MemberCategory" Association="Self.FK_Member_MemberCategory">
+            <End Role="MemberCategory" EntitySet="MemberCategories" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProducerDVDDetailsMapping_Producer" Association="Self.FK_ProducerDVDDetailsMapping_Producer">
+            <End Role="Producer" EntitySet="Producers" />
+            <End Role="ProducerDVDDetailsMapping" EntitySet="ProducerDVDDetailsMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_UserType" Association="Self.FK_Users_UserType">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="Model.Artist">
+              <MappingFragment StoreEntitySet="Artist">
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CastMembers">
+            <EntityTypeMapping TypeName="Model.CastMember">
+              <MappingFragment StoreEntitySet="CastMember">
+                <ScalarProperty Name="CastMemberId" ColumnName="CastMemberId" />
+                <ScalarProperty Name="DVDId" ColumnName="DVDId" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DVDCategories">
+            <EntityTypeMapping TypeName="Model.DVDCategory">
+              <MappingFragment StoreEntitySet="DVDCategory">
+                <ScalarProperty Name="DvdCatId" ColumnName="DvdCatId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DVDCopies">
+            <EntityTypeMapping TypeName="Model.DVDCopy">
+              <MappingFragment StoreEntitySet="DVDCopy">
+                <ScalarProperty Name="DCopyId" ColumnName="DCopyId" />
+                <ScalarProperty Name="DVDId" ColumnName="DVDId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ReleasedDate" ColumnName="ReleasedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DVDDetails">
+            <EntityTypeMapping TypeName="Model.DVDDetail">
+              <MappingFragment StoreEntitySet="DVDDetails">
+                <ScalarProperty Name="DVDId" ColumnName="DVDId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DVDCatId" ColumnName="DVDCatId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="Model.Loan">
+              <MappingFragment StoreEntitySet="Loan">
+                <ScalarProperty Name="LoanId" ColumnName="LoanId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="DCopyId" ColumnName="DCopyId" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="ReturnedDate" ColumnName="ReturnedDate" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+                <ScalarProperty Name="FineAmount" ColumnName="FineAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="Model.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberCatId" ColumnName="MemberCatId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberCategories">
+            <EntityTypeMapping TypeName="Model.MemberCategory">
+              <MappingFragment StoreEntitySet="MemberCategory">
+                <ScalarProperty Name="MemberCatId" ColumnName="MemberCatId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TotalDays" ColumnName="TotalDays" />
+                <ScalarProperty Name="TotalLoan" ColumnName="TotalLoan" />
+                <ScalarProperty Name="FineAmountPerDay" ColumnName="FineAmountPerDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="Model.Producer">
+              <MappingFragment StoreEntitySet="Producer">
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProducerDVDDetailsMappings">
+            <EntityTypeMapping TypeName="Model.ProducerDVDDetailsMapping">
+              <MappingFragment StoreEntitySet="ProducerDVDDetailsMapping">
+                <ScalarProperty Name="proDVDmapping" ColumnName="proDVDmapping" />
+                <ScalarProperty Name="DVDId" ColumnName="DVDId" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studios">
+            <EntityTypeMapping TypeName="Model.Studio">
+              <MappingFragment StoreEntitySet="Studio">
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="Model.UserType">
+              <MappingFragment StoreEntitySet="UserTypes">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

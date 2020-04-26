@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EverestVideoLibraryApp.Models.DVDCopy>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleasedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DVDDetail.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleasedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DVDDetail.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DCopyId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DCopyId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DCopyId })
+        </td>
+    </tr>
+}
+
+</table>
