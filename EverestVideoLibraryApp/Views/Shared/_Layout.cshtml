@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @Styles.Render("https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css")
+    @Scripts.Render("https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js")
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Everest Video Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -31,21 +35,21 @@
     </div>
     <div class="container body-content">
         <div class="row">
-            @Html.ActionLink("List of usersType", "Index", "UserTypes")<br />
-            @Html.ActionLink("List of users", "Index", "Users")<br />
-            @Html.ActionLink("List of Artist", "Index", "Artists")<br />
-            @Html.ActionLink("List of CastMembers", "Index", "CastMembers")<br />
-            @Html.ActionLink("List of DVDCategoies", "Index", "DVDCategories")<br />
-            @Html.ActionLink("List of DVDCopies", "Index", "DVDCopies")<br />
-            @Html.ActionLink("List of DVDDetails", "Index", "DVDDetails")<br />
-            @Html.ActionLink("List of Loans", "Index", "Loans")<br />
-            @Html.ActionLink("List of MemberCategories", "Index", "MemberCategories")<br />
-            @Html.ActionLink("List of Members", "Index", "Members")<br />
-            @Html.ActionLink("List of CastMembers", "Index", "ProducerDVDDetailsMappings")<br />
-            @Html.ActionLink("List of Producers", "Index", "Producers")<br />
-            @Html.ActionLink("List of Studios", "Index", "Studios")<br />
-            @Html.ActionLink("List of CastMembers", "Index", "CastMembers")<br />
+            <button class="btn btn-lg"> @Html.ActionLink("List of usersType", "Index", "UserTypes")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of users", "Index", "Users")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of Artist", "Index", "Artists")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of CastMembers", "Index", "CastMembers")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of DVDCategoies", "Index", "DVDCategories")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of DVDCopies", "Index", "DVDCopies")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of DVDDetails", "Index", "DVDDetails")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of Loans", "Index", "Loans")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of MemberCategories", "Index", "MemberCategories")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of Members", "Index", "Members")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of CastMembers", "Index", "ProducerDVDDetailsMappings")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of Producers", "Index", "Producers")</button>
+            <button class="btn btn-lg"> @Html.ActionLink("List of Studios", "Index", "Studios")</button>
         </div>
+        <hr />
 
         <div class="row">
             @RenderBody()
