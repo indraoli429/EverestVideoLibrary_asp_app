@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="581958774ba54bf496cfa6cafaa159b6" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="581958774ba54bf496cfa6cafaa159b6" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="Model.Artist" Width="1.5" PointX="9.625" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CastMember" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DVDCategory" Width="1.5" PointX="3.25" PointY="4.125" IsExpanded="true" />
@@ -20,20 +20,23 @@
         <EntityTypeShape EntityType="Model.UserType" Width="1.5" PointX="11.625" PointY="4.375" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Table_Artist" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Table_DVDDetails" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2" PointY="4.78125" />
-          <ConnectorPoint PointX="2.904710959242264" PointY="4.78125" />
+          <ConnectorPoint PointX="2" PointY="6.5667936197916656" />
           <ConnectorPoint PointX="2.904710959242264" PointY="3.8052722020404417" />
-          <ConnectorPoint PointX="7.1858504508138425" PointY="3.8052722020404417" />
-          <ConnectorPoint PointX="7.1858504508138425" PointY="4.78125" />
-          <ConnectorPoint PointX="7.5" PointY="4.78125" />
+          <ConnectorPoint PointX="1.032938570092985" PointY="3.8052722020404417" />
+          <ConnectorPoint PointX="1.032938570092985" PointY="7.0643683293362667" />
+          <ConnectorPoint PointX="1.7019526559302243" PointY="7.0643683293362667" />
+          <ConnectorPoint PointX="1.7019526559302243" PointY="8.79180339762114" />
+          <ConnectorPoint PointX="8.2926564962305136" PointY="8.79180339762114" />
+          <ConnectorPoint PointX="8.2926564962305136" PointY="8.5013109599816623" />
+          <ConnectorPoint PointX="8.6068060454166719" PointY="6.5128871468187732" />
+          <ConnectorPoint PointX="7.5" PointY="6.5128871468187732" />
+          <ConnectorPoint PointX="7.5" PointY="6.2302864583333326" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_DVDDetails_DVDCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_DVDCopy_DVDDetails" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2" PointY="4.1718724999999992" />
-          <ConnectorPoint PointX="2.4923470070440525" PointY="4.1718724999999992" />
-          <ConnectorPoint PointX="2.4923470070440525" PointY="3.4333111825274334" />
-          <ConnectorPoint PointX="3.5" PointY="3.4333111825274334" />
-          <ConnectorPoint PointX="3.5" PointY="2.8648893229166656" />
+          <ConnectorPoint PointX="2" PointY="6.3360375390624988" />
+          <ConnectorPoint PointX="3.046105479621132" PointY="6.3360375390624988" />
+          <ConnectorPoint PointX="3.046105479621132" PointY="2.8648893229166661" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_Loan_DVDCopy" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_DVDDetails_Studio" ManuallyRouted="false" />
